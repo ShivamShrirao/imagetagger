@@ -36,7 +36,7 @@ function calculateImageScale() {
   const ANNOTATE_URL = '/annotations/%s/';
   const IMAGE_SET_URL = '/images/imageset/%s/';
   const PRELOAD_BACKWARD = 2;
-  const PRELOAD_FORWARD = 5;
+  const PRELOAD_FORWARD = 3;
   const STATIC_ROOT = '/static/';
 
   // TODO: Find a solution for url resolvings
@@ -1057,6 +1057,9 @@ function calculateImageScale() {
     }
 
     loadAnnotateView(gImageList[imageIndex]);
+    cnv = document.getElementById("image_canvas");
+    cnv.height = globals.image.height();
+    cnv.width = globals.image.width();
   }
 
   /**

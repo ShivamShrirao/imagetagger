@@ -34,7 +34,7 @@ def annotate(request, image_id):
     selected_image = get_object_or_404(Image, id=image_id)
     imageset_perms = selected_image.image_set.get_perms(request.user)
     if 'read' in imageset_perms:
-        set_images = selected_image.image_set.images.all().order_by('name')
+        set_images = selected_image.image_set.images.all().order_by('id')
         annotation_types = AnnotationType.objects.filter(active=True)  # for the dropdown option
         imageset_lock = selected_image.image_set.image_lock
         return render(request, 'annotations/annotate.html', {

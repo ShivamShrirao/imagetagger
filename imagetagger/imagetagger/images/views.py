@@ -397,7 +397,7 @@ def view_imageset(request, image_set_id):
         messages.warning(request, 'you do not have the permission to access this imageset')
         return redirect(reverse('images:index'))
     # images the imageset contains
-    images = Image.objects.filter(image_set=imageset).order_by('name')
+    images = Image.objects.filter(image_set=imageset).order_by('id')
     # the saved exports of the imageset
     exports = Export.objects.filter(image_set=image_set_id).order_by('-id')[:5]
     filtered = False
@@ -742,11 +742,11 @@ def load_image_set(request) -> Response:
         serialized_image_set['images'] = ImageSerializer(
             image_set.images.exclude(
                 annotations__annotation_type=filter_annotation_type).order_by(
-                'name'), many=True).data
+                'id'), many=True).data
     else:
         # TODO: find a cleaner solution to order related field set wihtin ImageSet serializer
         serialized_image_set['images'] = ImageSerializer(
-            image_set.images.order_by('name'), many=True).data
+            image_set.images.order_by('id'), many=True).data
     return Response({
         'image_set': serialized_image_set,
     }, status=HTTP_200_OK)
