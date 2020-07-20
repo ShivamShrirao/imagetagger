@@ -470,6 +470,16 @@ function calculateImageScale() {
    */
 
   function handleMouseClick(e) {
+    // create a new highlight if the click was on an annotation
+    if (e.target.className === 'annotation') {
+      let editButton = $(e.target).find('.annotation_edit_button').parent();
+      $('#annotation_type_id').val(editButton.data('annotationtypeid'));
+      handleAnnotationTypeChange();
+      tool.setHighlightColor(editButton.data('annotationid'));
+      gHighlightedAnnotation = editButton.data('annotationid');
+      $(e.target).addClass('alert-info');
+    }
+
     if (e && (e.target.id === 'image' || e.target.id === 'image_canvas')) {
       var position = globals.image.offset();
       globals.mouseClickX = Math.round((e.pageX - position.left));
@@ -496,7 +506,6 @@ function calculateImageScale() {
         gHighlightedAnnotation = undefined;
       }
     }
-
     // create a new highlight if the click was on an annotation
     if (e.target.className === 'annotation') {
       let editButton = $(e.target).find('.annotation_edit_button').parent();
