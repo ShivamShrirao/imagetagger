@@ -703,41 +703,52 @@ function calculateImageScale() {
     let len = Object.keys(vector).length;
     switch (vector_type) {
       case 1: // Ball (Boundingbox)
+        console.log("case 1");
         return vector.x2 - vector.x1 >= 1 && vector.y2 - vector.y1 >= 1 && len === 4;
       case 2: // Point
+        console.log("case 2");
         return vector.hasOwnProperty('x1') && vector.hasOwnProperty('y1') && len === 2 && !(vector.x1 === 0 && vector.y1 === 0);
       case 3: // Line
+        console.log("case 3");
         return vector.x1 !== vector.x2 || vector.y1 !== vector.y2 && len === 4;
       case 4: // Multiline
         // a multiline should have at least two points
+        console.log("case 4");
         if (len < 4) {
+          console.log("case 4 len < 4");
           return false;
         }
         for (let i = 1; i < len / 2 + 1; i++) {
           for (let j = 1; j < len / 2 + 1; j++) {
             if (i !== j && vector['x' + i] === vector['x' + j] && vector['y' + i] === vector['y' + j]) {
+              console.log("case 4 for loop.");
               return false;
             }
           }
         }
         return true;
       case 5: // Polygon
+        console.log("case 5");
         if (len < 6) {
           // A polygon should have at least three points
+          console.log("case 5  len < 6");
           return false;
         }
         if (node_count !== 0 && node_count !== (len / 2)) {
+          console.log("case 5 node_count");
           return false;
         }
         for (let i = 1; i <= len / 2; i++) {
           for (let j = 1; j <= len / 2; j++) {
             if (i !== j && vector["x" + i] === vector["x" + j] && vector["y" + i] === vector["y" + j]) {
+              console.log("case 5 for loop.");
               return false;
             }
           }
         }
         return true;
     }
+    console.log("case None");
     return false;
   }
 
