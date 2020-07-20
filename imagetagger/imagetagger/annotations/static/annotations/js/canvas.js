@@ -595,12 +595,16 @@ class Canvas {
 
   setHighlightColor(id) {
     let d = this.getDrawingById(id);
-    d.setColor(true);
+    if (d){
+	    d.setColor(true);
+	}
   }
 
   unsetHighlightColor(id) {
     let d = this.getDrawingById(id);
-    d.setColor(false);
+    if (d){
+	    d.setColor(false);
+	}
   }
 
   reloadSelection(annotation_id) {
