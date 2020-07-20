@@ -1,6 +1,7 @@
 *.swp
 *.swo
 settings.py
+imagetagger/static/
 # ---> Python
 # Byte-compiled / optimized / DLL files
 __pycache__/
