@@ -597,14 +597,14 @@ class Canvas {
     let d = this.getDrawingById(id);
     if (d){
 	    d.setColor(true);
-	}
+	  }
   }
 
   unsetHighlightColor(id) {
     let d = this.getDrawingById(id);
     if (d){
 	    d.setColor(false);
-	}
+	  }
   }
 
   reloadSelection(annotation_id) {
