@@ -959,6 +959,12 @@ function calculateImageScale() {
     } else {
       handleNewAnnotations();
     }
+    cnv = document.getElementById("image_canvas");
+    cnv.height = globals.image.height();
+    if (cnv.height < 5) {
+      cnv.height = 500;
+    }
+    cnv.width = globals.image.width();
   }
 
   /**
@@ -1084,9 +1090,6 @@ function calculateImageScale() {
     }
 
     loadAnnotateView(gImageList[imageIndex]);
-    cnv = document.getElementById("image_canvas");
-    cnv.height = globals.image.height();
-    cnv.width = globals.image.width();
   }
 
   /**
