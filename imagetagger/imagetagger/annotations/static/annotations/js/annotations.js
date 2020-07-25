@@ -742,17 +742,19 @@ function calculateImageScale() {
           console.log(len);
           return false;
         }
-        // for (let i = 1; i <= len / 2; i++) {
-        //   for (let j = 1; j <= len / 2; j++) {
-        //     if (i !== j && vector["x" + i] === vector["x" + j] && vector["y" + i] === vector["y" + j]) {
-        //       console.log("case 5 for loop.");
-        //       console.log(i);
-        //       console.log(j);
-        //       console.log(vector);
-        //       return false;
-        //     }
-        //   }
-        // }
+        for (let i = 1; i <= len / 2; i++) {
+          for (let j = 1; j <= len / 2; j++) {
+            if (i !== j && vector["x" + i] === vector["x" + j] && vector["y" + i] === vector["y" + j]) {
+              console.log("case 5 for loop.");
+              vector["x" + j] += 1;
+              vector["y" + j] -= 1;
+              console.log(i);
+              console.log(j);
+              console.log(vector);
+              // return false;
+            }
+          }
+        }
         return true;
     }
     console.log("case None");
