@@ -16,9 +16,37 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 from django_registration.backends.activation.views import RegistrationView
 
 from .users.forms import UserRegistrationForm
+import datetime
+
+uid_data = {}
+
+
+@csrf_exempt
+def monitoring(request):
+    if request.method == "POST":
+        uid = request.POST.get('uid', None)
+        print(uid)
+        if uid:
+            uid_data[uid] = datetime.datetime.now()
+            print(uid_data[uid].strftime("%Y-%m-%d %H:%M:%S"))
+            return str(uid_data[uid].strftime("%Y-%m-%d %H:%M:%S"))
+        else:
+            return "Incorrect Request."
+    else:
+        data = []
+        for k, v in uid_data:
+            row = [k, v]
+            if (datetime.datetime.now() - v) > 60:
+                row.append('online')
+            else:
+                row.append('offline')
+            data.append(row)
+
+        return render(request, 'base/monitoring.html', {"data": data})
 
 urlpatterns = [
     url(r'^user/', include('django.contrib.auth.urls')),
@@ -32,6 +60,7 @@ urlpatterns = [
     url(r'^users/', include('imagetagger.users.urls')),
     url(r'^tagger_messages/', include('imagetagger.tagger_messages.urls')),
     url(r'^tools/', include('imagetagger.tools.urls')),
+    url('monitoring', monitoring, name='monitoring'),
 ]
 
 
