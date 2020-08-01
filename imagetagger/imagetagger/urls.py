@@ -38,7 +38,7 @@ def monitoring(request):
             return render(request, 'base/monitoring.html')
     else:
         data = []
-        for k, v in uid_data:
+        for k, v in uid_data.items():
             row = [k, v]
             print(row)
             if (datetime.datetime.now() - v) > 60:
