@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Monitor Devices</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Device ID</th>
+        <th>Last Update</th>
+        <th>Status</th>
+    </tr>
+    {% for row in data %}
+    <tr>
+        <td>{{ row.0 }}</td>
+        <td>{{ row.1 }}</td>
+        <td>{{ row.2 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
