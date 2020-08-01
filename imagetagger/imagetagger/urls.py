@@ -33,9 +33,9 @@ def monitoring(request):
         if uid:
             uid_data[uid] = datetime.datetime.now()
             print(uid_data[uid].strftime("%Y-%m-%d %H:%M:%S"))
-            return str(uid_data[uid].strftime("%Y-%m-%d %H:%M:%S"))
+            return render(request, 'base/monitoring.html')
         else:
-            return "Incorrect Request."
+            return render(request, 'base/monitoring.html')
     else:
         data = []
         for k, v in uid_data:
