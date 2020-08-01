@@ -40,12 +40,16 @@ def monitoring(request):
         data = []
         for k, v in uid_data:
             row = [k, v]
+            print(row)
             if (datetime.datetime.now() - v) > 60:
                 row.append('online')
+                print(row)
             else:
                 row.append('offline')
+                print(row)
+            print(row)
             data.append(row)
-
+            print(data)
         return render(request, 'base/monitoring.html', {"data": data})
 
 urlpatterns = [
