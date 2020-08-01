@@ -20,9 +20,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django_registration.backends.activation.views import RegistrationView
 
 from .users.forms import UserRegistrationForm
-import datetime
+from time import time
 
-uid_data = {"first": datetime.datetime.now()}
+uid_data = {"first": time()}
 
 
 @csrf_exempt
@@ -31,17 +31,17 @@ def monitoring(request):
         uid = request.POST.get('uid', None)
         print(uid)
         if uid:
-            uid_data[uid] = datetime.datetime.now()
-            print(uid_data[uid].strftime("%Y-%m-%d %H:%M:%S"))
+            uid_data[uid] = time()
             return render(request, 'base/monitoring.html')
         else:
             return render(request, 'base/monitoring.html')
     else:
         data = []
         for k, v in uid_data.items():
-            row = [k, v]
+            diff = time() - v
+            row = [k, str(diff//60)+" minutes ago."]
             print(row)
-            if (datetime.datetime.now() - v) > 60:
+            if diff > 60:
                 row.append('online')
                 print(row)
             else:
