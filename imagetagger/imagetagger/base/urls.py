@@ -6,5 +6,5 @@ app_name = 'base'
 urlpatterns = [
 		url(r'^$', views.index, name='index'),
 		url(r'^problems/$', views.problem_report, name='problem'),
-		url('monitoring/', views.monitoring, name='monitoring')
+		url('monitoring', views.monitoring, name='monitoring')
 		]

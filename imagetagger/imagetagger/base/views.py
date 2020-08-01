@@ -3,6 +3,8 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 import datetime
 
+from django.views.decorators.csrf import csrf_exempt
+
 uid_data = {}
 
 
@@ -19,6 +21,7 @@ def problem_report(request):
         return redirect(settings.PROBLEMS_URL)
 
 
+@csrf_exempt
 def monitoring(request):
     if request.method == "POST":
         uid = request.POST.get('uid', None)
