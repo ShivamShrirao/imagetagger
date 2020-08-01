@@ -22,7 +22,7 @@ from django_registration.backends.activation.views import RegistrationView
 from .users.forms import UserRegistrationForm
 import datetime
 
-uid_data = {}
+uid_data = {"first": datetime.datetime.now()}
 
 
 @csrf_exempt
