@@ -28,6 +28,8 @@ def monitoring(request):
         if uid:
             uid_data[uid] = datetime.datetime.now()
             return uid_data[uid]
+        else:
+            return "Incorrect Request."
     else:
         data = []
         for k, v in uid_data:
