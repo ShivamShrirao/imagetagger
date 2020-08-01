@@ -38,13 +38,16 @@ def monitoring(request):
         data = []
         for k, v in uid_data.items():
             diff = time() - v
-            row = [k, str(diff/60)+" minutes ago"]
+            row = [k, str(diff/60)[:6]+" minutes ago"]
             if diff < 120:
+                row.append('green')
                 row.append('online')
             else:
+                row.append('red')
                 row.append('offline')
             data.append(row)
         return render(request, 'base/monitoring.html', {"data": data})
+
 
 urlpatterns = [
     url(r'^user/', include('django.contrib.auth.urls')),
