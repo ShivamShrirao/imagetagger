@@ -29,7 +29,6 @@ uid_data = {"first": time()}
 def monitoring(request):
     if request.method == "POST":
         uid = request.POST.get('uid', None)
-        print(uid)
         if uid:
             uid_data[uid] = time()
             return render(request, 'base/monitoring.html')
@@ -39,17 +38,12 @@ def monitoring(request):
         data = []
         for k, v in uid_data.items():
             diff = time() - v
-            row = [k, str(diff//60)+" minutes ago."]
-            print(row)
-            if diff > 60:
+            row = [k, str(diff//60)+" minutes ago"]
+            if diff < 120:
                 row.append('online')
-                print(row)
             else:
                 row.append('offline')
-                print(row)
-            print(row)
             data.append(row)
-            print(data)
         return render(request, 'base/monitoring.html', {"data": data})
 
 urlpatterns = [
