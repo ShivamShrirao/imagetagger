@@ -38,7 +38,7 @@ def monitoring(request):
         data = []
         for k, v in uid_data.items():
             diff = time() - v
-            row = [k, str(diff//60)+" minutes ago"]
+            row = [k, str(diff/60)+" minutes ago"]
             if diff < 120:
                 row.append('online')
             else:
